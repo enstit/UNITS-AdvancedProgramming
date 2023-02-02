@@ -1,15 +1,12 @@
-# **SISSA Advanced Programming and Algorithm Design final exam questions**
+# **SISSA Advanced Programming final exam questions**
 
-This file contains a collection of questions (and relative answers) from the final exam of **Advanced Programming and Algorithm Design** Course, taught by **Prof. Irina Daydenkova** at [SISSA (Trieste, Italy)](https://github.com/sissa) in the academic year 2022-2023.\
+This file contains a collection of questions (and relative answers) from the final exam of **Advanced Programming** Course, taught by **Prof. Irina Daydenkova** at [SISSA (Trieste, Italy)](https://github.com/sissa) in the academic year 2022-2023.\
 The course covers the basics of programming in C++ and Python, and how to interface the two languages.
 
 
 ---
 
 ## **<img style="height:3em;vertical-align:middle;margin-right:1em;" src="./images/C++.svg"> C++**
-
-
-### **Variable types, keywords** - Lecture 1 (2022-10-04)
 
 
 <details>
@@ -23,7 +20,6 @@ The course covers the basics of programming in C++ and Python, and how to interf
 
 </details>
 
-
 <details>
 <summary>
 
@@ -35,11 +31,10 @@ An integer overflow occurs when you attempt to store inside an integer variable 
 
 </details>
 
-
 <details>
 <summary>
 
-#### Why using namespace std might not be a good idea?
+#### Why `using namespace std` might not be a good idea?
 
 </summary>
 
@@ -47,7 +42,6 @@ Because it might slow the program down.
 It is okay for short code, but it is better to avoid it for longer ones (It is used to avoid typing `std::` every time).
 
 </details>
-
 
 <details>
 <summary>
@@ -61,7 +55,6 @@ It is okay for short code, but it is better to avoid it for longer ones (It is u
 ```
 
 </details>
-
 
 <details>
 <summary>
@@ -79,7 +72,7 @@ int main(){
 <details>
 <summary>
 
-#### What is the difference in C++ between struct and class?
+#### What is the difference in C++ between `struct` and `class`?
 
 </summary>
 
@@ -87,18 +80,16 @@ The elements of struct are public by default, while those of class are private.
 
 </details>
 
-
 <details>
 <summary>
 
-#### What does break statement do in a loop?
+#### What does `break` statement do in a loop?
 
 </summary>
 
 Breaks out the loop.
 
 </details>
-
 
 <details>
 <summary>
@@ -110,7 +101,6 @@ Breaks out the loop.
 Skips to the next iteration in the loop.
 
 </details>
-
 
 <details>
 <summary>
@@ -125,7 +115,6 @@ int arr[7];
 
 </details>
 
-
 <details>
 <summary>
 
@@ -139,10 +128,6 @@ std::cin>>x;
 
 </details>
 
-
-### **Functions, references and pointers, class member functions and constructors** - Lecture 2 (2022-10-06)
-
-
 <details>
 <summary>
 
@@ -155,7 +140,6 @@ Once a reference is initialized with a variable, either the variable name or the
 
 </details>
 
-
 <details>
 <summary>
 
@@ -167,7 +151,6 @@ Once a reference is initialized with a variable, either the variable name or the
 * (Lisa) When passing a variable by value, only the value of the actual parameter is copied to the function's formal parameter: those two types of parameters are stored in different memory locations, so any changes made inside functions are not reflected in the actual parameter of the caller. Instead, when passing by reference, both the actual and formal parameters refer to the same locations, so any changes made inside the function are actually reflected in the actual parameter of the caller.
 
 </details>
-
 
 <details>
 <summary>
@@ -182,7 +165,6 @@ We can pass by reference when we want that something is not modified nor copied.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -194,18 +176,16 @@ Putting a `&` in front of the variable.
 
 </details>
 
-
 <details>
 <summary>
 
-#### Why do we want to use const modifier whenever possible?
+#### Why do we want to use `const` modifier whenever possible?
 
 </summary>
 
 To have an easy way to ensure that our data is not modified.
 
 </details>
-
 
 <details>
 <summary>
@@ -219,7 +199,6 @@ The process is called *dereference*.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -230,7 +209,6 @@ The process is called *dereference*.
 The memory address of whatever the pointer points to.
 
 </details>
-
 
 <details>
 <summary>
@@ -245,7 +223,6 @@ If it doesn't return any value, its return type is `void`.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -256,7 +233,6 @@ If it doesn't return any value, its return type is `void`.
 When we are not sure about the type of the return of a function (or when it is too long), we can use the `auto` keyword, which checks on its own what is the return type of the function and applies it.
 
 </details>
-
 
 <details>
 <summary>
@@ -269,7 +245,6 @@ It’s when we have functions with the same name but that input a different amou
 
 </details>
 
-
 <details>
 <summary>
 
@@ -280,7 +255,6 @@ It’s when we have functions with the same name but that input a different amou
 A function that calls itself.
 
 </details>
-
 
 <details>
 <summary>
@@ -294,7 +268,6 @@ Constructors exist to initialize class member variables. Default constructor tak
 
 </details>
 
-
 <details>
 <summary>
 
@@ -305,14 +278,10 @@ Constructors exist to initialize class member variables. Default constructor tak
 (Alessandro Cesa) We can change a private member of a class only using a class-member function.
 </details>
 
-
-### **General program structure, Makefiles, operator overloads, working with text files** - Lecture 3 (2022-10-18)
-
-
 <details>
 <summary>
 
-#### How do you create an object file with g++?
+#### How do you create an object file with `g++`?
 
 </summary>
 
@@ -320,7 +289,6 @@ By running `g++ -c example.cpp`.
 This will give us the file `example.o` which is the object file.
 
 </details>
-
 
 <details>
 <summary>
@@ -333,7 +301,6 @@ Because, for big projects, we would end up having files that are too long.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -345,18 +312,16 @@ To avoid that a function which is used in multiple files could be redefined from
 
 </details>
 
-
 <details>
 <summary>
 
-#### What does `-IFOLDER_NAME` mean when passed to g++?
+#### What does `-IFOLDER_NAME` mean when passed to `g++`?
 
 </summary>
 
 It specifies the folder in which the headers are.
 
 </details>
-
 
 <details>
 <summary>
@@ -369,7 +334,6 @@ Yes, they cannot be replaced by spaces.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -380,7 +344,6 @@ Yes, they cannot be replaced by spaces.
 It evaluates (gives) the name of the current target.
 
 </details>
-
 
 <details>
 <summary>
@@ -393,18 +356,16 @@ It evaluates the filenames of all the prerequisites, separated by spaces.
 
 </details>
 
-
 <details>
 <summary>
 
-#### How to use `make` with a makefile that is not named Makefile?
+#### How to use `make` with a makefile that is not named `Makefile`?
 
 </summary>
 
 `make` has to be followed by the name of the makefile.
 
 </details>
-
 
 <details>
 <summary>
@@ -417,7 +378,6 @@ It can access private member variables of a class.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -428,7 +388,6 @@ It can access private member variables of a class.
 To be able to access their private variables, without having to set the variables of the class as public.
 
 </details>
-
 
 <details>
 <summary>
@@ -443,7 +402,6 @@ To be able to access their private variables, without having to set the variable
 
 </details>
 
-
 <details>
 <summary>
 
@@ -457,10 +415,6 @@ filevar.open("file.txt", std::ios_base::app);
 
 </details>
 
-
-### **Templates (functions, classes, specialization), std::array and std::vector** - Lecture 4 (2022-10-20)
-
-
 <details>
 <summary>
 
@@ -471,7 +425,6 @@ filevar.open("file.txt", std::ios_base::app);
 Not having to overload a function for every type that we are going to use it with.
 
 </details>
-
 
 <details>
 <summary>
@@ -484,7 +437,6 @@ Not having to overload a function for every type that we are going to use it wit
 
 </details>
 
-
 <details>
 <summary>
 
@@ -496,7 +448,6 @@ Integer numbers (meaning anything that is mathematically integer, not just int).
 
 </details>
 
-
 <details>
 <summary>
 
@@ -507,7 +458,6 @@ Integer numbers (meaning anything that is mathematically integer, not just int).
 Having different codes in the template based on the data type.
 
 </details>
-
 
 <details>
 <summary>
@@ -521,7 +471,6 @@ Having different codes in the template based on the data type.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -534,7 +483,6 @@ Having different codes in the template based on the data type.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -545,7 +493,6 @@ Having different codes in the template based on the data type.
 We can pass vector’s content either as `&myvec[0]` or as `myvec.data`.
 
 </details>
-
 
 <details>
 <summary>
@@ -558,10 +505,6 @@ Because we prefer data to be contiguous in memory.
 
 </details>
 
-
-### **Memory management, smart pointers, copy constructors and assignment operators** - Lecture 5 (2022-10-25)
-
-
 <details>
 <summary>
 
@@ -572,7 +515,6 @@ Because we prefer data to be contiguous in memory.
 With `new int[N]`.
 
 </details>
-
 
 <details>
 <summary>
@@ -586,7 +528,6 @@ They are both used to free memory on a heap.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -599,7 +540,6 @@ We will also need to overload assignment operator.
 
 </details>
 
-
 <details>
 <summary>
 
@@ -610,7 +550,6 @@ We will also need to overload assignment operator.
 When I want to move an object instead of copying it.
 
 </details>
-
 
 <details>
 <summary>
@@ -686,9 +625,6 @@ To avoid memory leaks.
 Virtual destructors guarantee that the object of a derived class is destructed properly.
 
 </details>
-
-
-### **Lambda functions, strings/streams and various topics (timing, command line parameters)** - Lecture 7 (2022-11-15)
 
 <details>
 <summary>
