@@ -6,45 +6,41 @@ The course covers the basics of programming in C++ and Python, and how to interf
 
 ---
 
-## **<img style="height:3em;vertical-align:middle;margin-right:1em;" src="./images/C++.svg"> C++**
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 1** - Hello world, data types and classes
 
+### Questions
 
-<details>
-<summary>
+<details><summary>
 
 #### Name at least five variable types in C++.
 
 </summary>
 
-`int`, `double`, `char`, `string`, `bool`, ...
+Primitive data types in C++ are `int`, `long int`, `long long int`, `float`, `double`, `char`, `bool`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
-#### What is <i>int overflow</i>?
+#### What is *int overflow*?
 
 </summary>
 
-An integer overflow occurs when you attempt to store inside an integer variable a value that is larger than the maximum value the variable can hold.
+An *int overflow* is a phenomenon that occurs when an integer variable assumes a value that is greater than the maximum value that C++ `int` type can store.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why `using namespace std` might not be a good idea?
 
 </summary>
 
-Because it might slow the program down.
-It is okay for short code, but it is better to avoid it for longer ones (It is used to avoid typing `std::` every time).
+Pulling a specific namespace into the global namespace is not good as it defeats the purpose of namespaces, and can lead to *namespace pollution*.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Which header do you have to include for the access to `std::cout`?
 
@@ -56,8 +52,7 @@ It is okay for short code, but it is better to avoid it for longer ones (It is u
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What would be the simplest "legal" program in C++?
 
@@ -69,8 +64,7 @@ int main(){
 ```
 
 </details>
-<details>
-<summary>
+<details><summary>
 
 #### What is the difference in C++ between `struct` and `class`?
 
@@ -80,30 +74,27 @@ The elements of struct are public by default, while those of class are private.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does `break` statement do in a loop?
 
 </summary>
 
-Breaks out the loop.
+It exits the loop without executing the remaining code, even if the condition in the guard is still true.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does `continue` statement do in a loop?
 
 </summary>
 
-Skips to the next iteration in the loop.
+It skips the execution to the next iteration in the loop, if any.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you define a static array of type `int` and size 7?
 
@@ -115,92 +106,193 @@ int arr[7];
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What can you use to read interactive user input?
 
 </summary>
 
 ```C++
+#include <iostream>
+...
 std::cin>>x;
+...
 ```
 
 </details>
 
-<details>
-<summary>
+
+### Code snippets
+
+Find the errors in the following *code snippets*:
+
+<details><summary>
+
+```C++
+int a{8},b{8};
+if (a=b){
+    std::cout<<"equal"<<std::endl
+}
+```
+
+</summary>
+
+There is a missing semicolon after the `std::endl`.
+Moreover, it is better to use the equal operator `==` in the `if` condition.
+
+</details>
+
+<details><summary>
+
+```C++
+{int a{2};}
+a=4;
+```
+
+</summary>
+
+The variable `a` does not exist outside its scope, so it cannot be used unless it is not re-initialized.
+
+</details>
+
+<details><summary>
+
+```C++
+double x{0.5},y{0.5};
+if(x==y){
+    std::cout<<"x is equal to y"<<std::endl;
+}
+```
+
+</summary>
+
+Comparing `double` variables in this way can lead to error.
+In C++, to comprare the equalivalence of two `double` variables it should be compared its difference with a tiny epsilon value.
+
+</details>
+
+<details><summary>
+
+```C++
+int x{1},y{1};
+while (x<10){
+   std::cout<<x<<" "<<std::endl;
+   y++;
+}
+```
+
+</summary>
+
+The `while` loop will never terminate in this way, becuase the condition `x<10` will always be positive unless `x` is increased inside the `while` scope.
+
+</details>
+
+<details><summary>
+
+```C++
+int ar[10];
+for (int i=0;i<=10;i++){
+  ar[i]=i;
+}
+```
+
+</summary>
+
+The array index are zero-based, so `ar[10]` does not belong to the array.
+
+</details>
+
+<details><summary>
+
+```C++
+struct mystruct{
+private:
+  int a;
+  int b;
+}
+int main(){
+  mystruct S;
+  S.a=8;
+  S.b=7;
+  return 0;
+}
+```
+
+</summary>
+
+Private members of a `struct` can not be accessed from outside the struct definition scope.
+Also, a semicolon is missing after the `struct` closing bracket.
+
+</details>
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 2** - References and pointers, functions, class member functions and constructors
+
+### Questions
+
+<details><summary>
 
 #### What is a reference?
 
 </summary>
 
 A reference is an alias, that is, another name for an already existing variable.
-Once a reference is initialized with a variable, either the variable name or the reference name may be used to refer to the variable.
+Once a reference is initialized with a variable, either the variable name or the reference name can be used to refer to the same variable.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is the difference between passing variables to functions by reference and by value?
 
 </summary>
 
-* (Alessandro Cesa) When a variable is passed by value, inside the function a new variable (with a different memory address) is created, and just the value of the passed variable gets copied to the new one. This means that any modification made to the variable inside the function will not reflect on the original variable. # When a variable is passed by reference, a reference to the passed variable is created (which will have the same memory address). If the value of the variable is changed inside the function, this change will also apply to the original variable.
-* (Lisa) When passing a variable by value, only the value of the actual parameter is copied to the function's formal parameter: those two types of parameters are stored in different memory locations, so any changes made inside functions are not reflected in the actual parameter of the caller. Instead, when passing by reference, both the actual and formal parameters refer to the same locations, so any changes made inside the function are actually reflected in the actual parameter of the caller.
+When passing a variable by value, only the value of the actual parameter is copied to the function's formal parameter: those two types of parameters are stored in different memory locations, so any changes made inside functions are not reflected in the actual parameter of the caller. Instead, when passing by reference, both the actual and formal parameters refer to the same locations, so any changes made inside the function are actually reflected in the actual parameter of the caller.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why do we want to pass variables to functions by reference rather than by pointer?
 
 </summary>
 
-To avoid confusion with arrays (which are already pointers).
-In C++ it’s better to use references to pass single variables, while pointers are used for arrays.
-We can pass by reference when we want that something is not modified nor copied.
+To avoid confusion with arrays (which already **are** pointers).
+In C++ it is better to use references to pass single variables, while pointers are used for arrays. We can pass by reference when we want that something is not modified nor copied.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### If the function accepts pointers (signature `int function(int* a)`), how do you pass a variable defined as `int x` to it?
 
 </summary>
 
-Putting a `&` in front of the variable.
+Putting a `&` in front of the variable name.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why do we want to use `const` modifier whenever possible?
 
 </summary>
 
-To have an easy way to ensure that our data is not modified.
+To ensure that the variable data is not nodified (indeed, it is a constant).
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### If you have a pointer named `p`, how do you access a value it points to? What is the name of that process?
 
 </summary>
 
-To access the value, we need to put a `*` before the name (of the pointer).
-The process is called *dereference*.
+To access the value, we need to put a `*` before the name of the pointer (`*p`, in this case).
+The process is called **dereference**.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What value is stored in the pointer variable itself?
 
@@ -210,76 +302,160 @@ The memory address of whatever the pointer points to.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What can you say about a function that has signature `void function()`?
 
 </summary>
 
-A function is a block of code that performs some operation.
-It can take input parameters and it can return a value as output.
-If it doesn't return any value, its return type is `void`. 
+The function `function()` does not accept any input parameter, could performs some operation and does not return any value. Its return type is `void`. 
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is an `auto` keyword?
 
 </summary>
 
-When we are not sure about the type of the return of a function (or when it is too long), we can use the `auto` keyword, which checks on its own what is the return type of the function and applies it.
+`auto` keyword is a placeholder for the actual type of the data, when not know in advice (or multiple options ca be). The `auto` keyword checks on its own what is the return type of the function and applies it.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is function overloading?
 
 </summary>
 
-It’s when we have functions with the same name but that input a different amount of parameters or parameters of different types.
+**Function overloading** is the practise of defining multiple functions with the same name, but with different input parameters (in nnumber and types).
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is a recursive function?
 
 </summary>
 
-A function that calls itself.
+To know what is the answer to this question, check the answer of "What is a recursive function?".
+
+Just kidding. It is a function that calls itself.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is the role of a constructor in a class?
 
 </summary>
 
-Constructors exist to initialize class member variables. Default constructor takes no parameters
-
+Constructors exist to initialize class member variables.
+If no custom parameters are provided, the default constructor initialize the class member with default values.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How can we change private member variables of a class?
 
 </summary>
 
-(Alessandro Cesa) We can change a private member of a class only using a class-member function.
+Private member of a class can be changed only using a class-member function or a friend function.
+
 </details>
 
-<details>
-<summary>
+### Code snippets
+
+Find the errors in the following *code snippets*:
+
+<details><summary>
+
+```C++
+void add_two(int* a){
+    a=a+2;
+}
+int main(){
+    int var{0};
+    add_two(&var);
+    std::cout<<var<<std::endl;
+    return 0;
+}
+```
+
+</summary>
+
+The `add_two` function operates on pointer, so by printing `var` we are actually printing the content of another memory cell.
+If the aim of the function is to add 2 to an integer variable, we need to de-reference the pointer by adding a `*` before the name of the pointer in the function corpus.
+
+</details>
+
+<details><summary>
+
+```C++
+void swap(int a, int b){
+   int temp{a};
+   a=b;
+   b=a; 
+}
+int main(){
+   int var1{8}, var2{9};
+   swap(var1,var2);
+   std::cout<<var1<<" "<<var2<<std::endl;
+   return 0;
+}
+```
+
+</summary>
+
+In order to correctly swap the values of the two variables, they should be passed by reference to the function (`swap(int& a, int& b)`).
+Also, the `b` variable should take the value of `temp`.
+
+</details>
+
+<details><summary>
+
+```C++
+class CMyClass{
+    int a;
+    CMyClass(int x):a(x){};
+}
+
+int main(){
+   CMyClass c(7);
+   std::cout<<"this won't work"<<std::endl;
+   return 0;
+}
+```
+
+</summary>
+
+If the constructor of `CMyClass` is not made public, it can not be accessed by outside the scope.
+Also, a semicolon is missing after the `CMyClass` closing bracket.
+
+</details>
+
+<details><summary>
+
+```C++
+int main(){
+int x=4;
+int& y;
+
+...
+}
+```
+
+</summary>
+
+a reference has to be initialized when declared. In this case, we should have written `int& y=x;` to have a reference `y` to `x`.
+
+</details>
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 3** - Makefiles, operator overloads, working with text files
+
+
+<details><summary>
 
 #### How do you create an object file with `g++`?
 
@@ -290,8 +466,7 @@ This will give us the file `example.o` which is the object file.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why can't you just have everything in one file?
 
@@ -301,8 +476,7 @@ Because, for big projects, we would end up having files that are too long.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is the purpose of a "header guard"?
 
@@ -312,8 +486,7 @@ To avoid that a function which is used in multiple files could be redefined from
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does `-IFOLDER_NAME` mean when passed to `g++`?
 
@@ -323,8 +496,7 @@ It specifies the folder in which the headers are.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Do tabs matter in a Makefile?
 
@@ -334,8 +506,7 @@ Yes, they cannot be replaced by spaces.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does `$@` mean in a Makefile?
 
@@ -345,8 +516,7 @@ It evaluates (gives) the name of the current target.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does `$^` mean in a Makefile?
 
@@ -356,8 +526,7 @@ It evaluates the filenames of all the prerequisites, separated by spaces.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How to use `make` with a makefile that is not named `Makefile`?
 
@@ -367,8 +536,7 @@ It evaluates the filenames of all the prerequisites, separated by spaces.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does it mean if a function is a friend of a class?
 
@@ -378,8 +546,7 @@ It can access private member variables of a class.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why should non-class member operators be friends of classes?
 
@@ -389,8 +556,7 @@ To be able to access their private variables, without having to set the variable
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Which header do you need to include to work with files?
 
@@ -402,8 +568,7 @@ To be able to access their private variables, without having to set the variable
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you open a file in append mode?
 
@@ -415,8 +580,7 @@ filevar.open("file.txt", std::ios_base::app);
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What's the main advantage of using templates?
 
@@ -426,8 +590,7 @@ Not having to overload a function for every type that we are going to use it wit
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why do people usually put definitions of templated functions directly into `.hpp` files?
 
@@ -437,8 +600,7 @@ Not having to overload a function for every type that we are going to use it wit
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Except on types, what else can we template on?
 
@@ -448,8 +610,7 @@ Integer numbers (meaning anything that is mathematically integer, not just int).
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is template specialization?
 
@@ -459,8 +620,7 @@ Having different codes in the template based on the data type.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is a variadic template?
 
@@ -471,8 +631,7 @@ Having different codes in the template based on the data type.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why is using `push_back` for `std::vector` a bad idea?
 
@@ -483,8 +642,7 @@ Having different codes in the template based on the data type.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you pass data from `std::vector` to a "C-style" function that needs a pointer?
 
@@ -494,8 +652,7 @@ We can pass vector’s content either as `&myvec[0]` or as `myvec.data`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why you shouldn't use a "vector of vectors"?
 
@@ -505,8 +662,7 @@ Because we prefer data to be contiguous in memory.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you allocate a dynamic array in C++?
 
@@ -516,8 +672,7 @@ With `new int[N]`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What's the difference between `delete` and `delete[]`?
 
@@ -528,8 +683,7 @@ They are both used to free memory on a heap.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### When do you need to create a copy constructor for your class?
 
@@ -540,8 +694,7 @@ We will also need to overload assignment operator.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### When do you need to create a move constructor for your class?
 
@@ -551,8 +704,7 @@ When I want to move an object instead of copying it.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What should you do if your class allocates resources, but you are sure you will never need a copy constructor?
 
@@ -567,8 +719,7 @@ It will automatically call `delete[]` when going out of scope, so I don’t need
 ### **inheritance and dynamic polymorphism** - Lecture 6 (2022-11-08)
 
 
-<details>
-<summary>
+<details><summary>
 
 #### What are *protected class members*?
 
@@ -579,8 +730,7 @@ They are members that can be accessed only by friends and children (derived) cla
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What are *virtual functions*?
 
@@ -590,8 +740,7 @@ They are members that can be accessed only by friends and children (derived) cla
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is an abstract class?
 
@@ -602,8 +751,7 @@ It is characterized by the presence of at least one pure virtual function (decla
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Explain dynamic (runtime) polymorphism.
 
@@ -614,8 +762,7 @@ It is not recommended in high performance applications since it is slow.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why should destructors be made virtual?
 
@@ -626,8 +773,7 @@ Virtual destructors guarantee that the object of a derived class is destructed p
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is `[](){}()`?
 
@@ -638,8 +784,7 @@ A lambda expression is a way to define an anonymous function (a function without
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What's the general structure of a lambda function?
 
@@ -651,8 +796,7 @@ A lambda expression is a way to define an anonymous function (a function without
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does `mutable` keyword do in a lambda function?
 
@@ -664,11 +808,10 @@ In a lambda function, the `mutable` keyword allows the captured variables to be 
 
 ---
 
-## **<img style="height:3em;vertical-align:middle;margin-right:1em;" src="./images/python.svg"> Python**
+## **<img style="height:3em;vertical-align:middle;margin-right:1em;" src="./images/python.svg"> Python questions**
 
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you create markdown cell in Jupyter? (with keyboard commands)
 
@@ -679,8 +822,7 @@ After that, you can change a cell to Markdown by hitting the `M` key.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you delete a cell in Jupyter (with keyboard command)?
 
@@ -690,8 +832,7 @@ Hit the `esc` and then `D` + `D` (press the key twice) to delete the current cel
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you add a cell above the current one in Jupyter (with keyboard command)?
 
@@ -701,8 +842,7 @@ Hit the `esc` and then `A`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What advantage does *conda* environment provide over a system-wide installation of Python?
 
@@ -712,8 +852,7 @@ Hit the `esc` and then `A`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does it mean that variables are dynamically typed in Python?
 
@@ -723,8 +862,7 @@ Hit the `esc` and then `A`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What's the difference between Python and C/C++ integers?
 
@@ -734,8 +872,7 @@ Hit the `esc` and then `A`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Explain the difference between lists, sets and tuples in Python.
 
@@ -745,8 +882,7 @@ Hit the `esc` and then `A`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What does negative index mean when accessing list elements?
 
@@ -756,8 +892,7 @@ It starts from the last element of the list (e.g `mylist[-1]` means the last ele
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you print the first $n$ elements of a list?
 
@@ -769,8 +904,7 @@ print(mylist[:n])
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you print every $n$-th element of a list?
 
@@ -782,8 +916,7 @@ print(mylist[::n])
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### How do you print the reverse list?
 
@@ -799,8 +932,7 @@ print(mylist.reverse())
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Give an example of a list comprehension.
 
@@ -812,8 +944,7 @@ squares = [i*i for i in range(10)]
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Give an example of cell and line magic commands in Jupyter.
 
@@ -826,8 +957,7 @@ squares = [i*i for i in range(10)]
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Write a "hello world" function in Python.
 
@@ -841,8 +971,7 @@ def helloworld():
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What are keyword function arguments in Python and what is their advantage?
 
@@ -852,8 +981,7 @@ def helloworld():
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Why shouldn't you do `from numpy import *`?
 
@@ -863,8 +991,7 @@ def helloworld():
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is the advantage of using numpy arrays over lists? What are the dangers?
 
@@ -874,8 +1001,7 @@ def helloworld():
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What's the most widely used package for plotting in Python?
 
@@ -885,8 +1011,7 @@ It is `matplotlib`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What's the purpose of `__str__` method in a Python class?
 
@@ -896,8 +1021,7 @@ It is `matplotlib`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What package can you use in Python for symbolic calculations?
 
@@ -907,8 +1031,7 @@ A library that allows you to do symbolic calculations in Python is `SymPy`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What are decorators? Write an example.
 
@@ -918,8 +1041,7 @@ A library that allows you to do symbolic calculations in Python is `SymPy`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### Name two ways of calling C++ code from Python.
 
@@ -929,8 +1051,7 @@ A library that allows you to do symbolic calculations in Python is `SymPy`.
 
 </details>
 
-<details>
-<summary>
+<details><summary>
 
 #### What is `pandas`? Name at least 5 functions from that package.
 
