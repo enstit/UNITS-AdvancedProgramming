@@ -454,6 +454,7 @@ a reference has to be initialized when declared. In this case, we should have wr
 
 ## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 3** - Makefiles, operator overloads, working with text files
 
+### Questions
 
 <details><summary>
 
@@ -472,7 +473,8 @@ This will give us the file `example.o` which is the object file.
 
 </summary>
 
-Because, for big projects, we would end up having files that are too long.
+Because, for big projects, we would end up having files that are too long. This makes difficult to navigate through the code.
+Dividing the preject in multiple files is also useful for re-using part sof code.
 
 </details>
 
@@ -532,7 +534,7 @@ It evaluates the filenames of all the prerequisites, separated by spaces.
 
 </summary>
 
-`make` has to be followed by the name of the makefile.
+`make` has to be followed by the flag `-f` and the name of the makefile.
 
 </details>
 
@@ -575,10 +577,83 @@ To be able to access their private variables, without having to set the variable
 </summary>
 
 ```C++
+ofstream filevar;
 filevar.open("file.txt", std::ios_base::app);
 ```
 
 </details>
+
+### Code snippets
+
+Find the errors in the following *code snippets*:
+
+<details><summary>
+
+```C++
+CCoords CCoords::operator+(const int& b) {
+        CCoords result;
+        result.x = x + b;
+        result.y = y + b;
+        return result;
+    }
+int main(){
+    CCoords c;
+    c.x=0;c.y=3;
+    auto cc=2+c;
+}
+```
+
+</summary>
+
+As it is defined, the *plus* operator is not commutative, so you can not sum an integer and a CCords in this order.
+
+</details>
+
+<details><summary>
+
+```C++
+class MyClass{
+  int x;
+  MyClass():x(0){};
+}
+std::ostream& operator<<(std::ostream& os, const MyClass& m){
+    os<<m.x<<std::endl;
+    return os;
+};
+int main(){
+    MyClass m;
+    std::cout<<m<<std::endl;
+}
+```
+
+</summary>
+
+Constructor should be mage *public*, and the signature of the friend function should be inside the class.
+
+</details>
+
+<details><summary>
+
+```C++
+int result;
+for(int i=0;i<N;i++){
+   result=calculate_result();//valid function defined somewhere else
+   std::ofstream filevar("results.txt");
+   filevar<<result<<std::endl;
+   filvar.close();
+}
+```
+
+</summary>
+
+If not opening the file in *append mode*, the content of it is being overwritten every time in the `filevar<<result<<std::endl` line, so it does not make sense do a loop since no effects will take place. Also, `filvar` is mis-spelled in the last code line.
+
+</details>
+
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 4** - Templates, arrays and vectors
+
+### Questions
 
 <details><summary>
 
@@ -596,7 +671,7 @@ Not having to overload a function for every type that we are going to use it wit
 
 </summary>
 
-(Alessandro Cesa) Because by doing this you don't have to re-define the function in the `main`.
+Because otherwise you should re-define the function in the `main` file.
 
 </details>
 
@@ -626,8 +701,7 @@ Having different codes in the template based on the data type.
 
 </summary>
 
-* It is a template (a class or function template) which can take a variable number of arguments.
-* (Alessandro Cesa) A variadic template is a template with more than one variable, where the type of the templated variable can change.
+A variadic template is a template with more than one variable, where the type of the templated variable can change.
 
 </details>
 
@@ -637,8 +711,7 @@ Having different codes in the template based on the data type.
 
 </summary>
 
-* Because it makes the code slower.
-* (Alessandro Cesa) Because you ran out of spaces on the vector, it creates a new one copying the old one, so it makes the code slower.
+Because you ran out of spaces on the vector, it creates a new one copying the old one, so it makes the code slower.
 
 </details>
 
@@ -648,7 +721,7 @@ Having different codes in the template based on the data type.
 
 </summary>
 
-We can pass vector’s content either as `&myvec[0]` or as `myvec.data`.
+We can pass vector’s content either as `&vec[0]` or as `vec.data`.
 
 </details>
 
@@ -661,6 +734,90 @@ We can pass vector’s content either as `&myvec[0]` or as `myvec.data`.
 Because we prefer data to be contiguous in memory.
 
 </details>
+
+
+### Code snippets
+
+Find the errors in the following *code snippets*:
+
+<details><summary>
+
+```C++
+template <typename T>
+class CMyClass{
+  T a;
+  T b;
+}
+
+int main(){
+  CMyClass var;
+ ...
+}
+```
+
+</summary>
+
+It should be specified the `var` data type (with triangular brackets).
+
+</details>
+
+<details><summary>
+
+```C++
+template <typename T, double S>
+void add_number(T& var){
+    T=T+S;
+}
+```
+
+</summary>
+
+In the function body, `var` should be used instead of `T`. Also, non-type parameter can only be integers (not `double`).
+
+</details>
+
+<details><summary>
+
+```C++
+template <typename... Types>
+void myPrint(const Types&... args){
+    std::cout<<arg<<" ";
+    myPrint(args...);
+}
+```
+
+</summary>
+
+You should template on type `T`, and the define a function for printing a single element.
+
+</details>
+
+<details><summary>
+
+```C++
+template <typename T>
+void print(const T& var){
+  std::cout<<var<<std::end;
+}
+
+struct MyClass{
+  int a;
+  int b;
+}
+
+int main(){
+ MyClass var;
+ print(var);
+}
+```
+
+</summary>
+
+Operator `<<` should be overloaded in the struct. 
+
+</details>
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 5** - Memory menagement
 
 <details><summary>
 
@@ -716,8 +873,7 @@ It will automatically call `delete[]` when going out of scope, so I don’t need
 </details>
 
 
-### **inheritance and dynamic polymorphism** - Lecture 6 (2022-11-08)
-
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 6** - Inheritance and dynamic polymorphism
 
 <details><summary>
 
@@ -773,6 +929,9 @@ Virtual destructors guarantee that the object of a derived class is destructed p
 
 </details>
 
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 7** - Command line parameters
+
 <details><summary>
 
 #### What is `[](){}()`?
@@ -808,8 +967,7 @@ In a lambda function, the `mutable` keyword allows the captured variables to be 
 
 ---
 
-## **<img style="height:3em;vertical-align:middle;margin-right:1em;" src="./images/python.svg"> Python questions**
-
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 8** - Jupyter
 
 <details><summary>
 
