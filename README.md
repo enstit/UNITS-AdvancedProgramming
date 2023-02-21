@@ -628,7 +628,7 @@ int main(){
 
 </summary>
 
-Constructor should be mage *public*, and the signature of the friend function should be inside the class.
+Constructor should be made *public*, and the signature of the friend function should be inside the class.
 
 </details>
 
@@ -711,7 +711,7 @@ A variadic template is a template with more than one variable, where the type of
 
 </summary>
 
-Because you ran out of spaces on the vector, it creates a new one copying the old one, so it makes the code slower.
+Because if you ran out of spaces on the vector, it creates a new one copying the old one, so it makes the code slower.
 
 </details>
 
@@ -825,7 +825,7 @@ Operator `<<` should be overloaded in the struct.
 
 </summary>
 
-With `new int[N]`.
+With `int *arr = new int[N]`, or using smart pointers.
 
 </details>
 
@@ -836,7 +836,17 @@ With `new int[N]`.
 </summary>
 
 They are both used to free memory on a heap.
-`delete` is for when we are allocating one object only, `delete[]` is in case we are allocating an array.
+`delete` is for when we are allocating one object only, `delete[]` is in case we are deleting an array.
+
+</details>
+
+<details><summary>
+
+#### When do you need to overload assignment operator for your class?
+
+</summary>
+
+When there are pointers inside the class, otherwise an assignment would just create a "shallow copy" (it copies the pointer to the data, not the data itself), and when the original object is deleted, the copy will point to a non-existing memory location, thus making the destructor not able to delete it. As a general rule, if you have pointers in your class and need a destructor, it's better to overload the assignment operator and the copy constructor.
 
 </details>
 
@@ -846,8 +856,7 @@ They are both used to free memory on a heap.
 
 </summary>
 
-When we have pointers in our class and need a destructor.
-We will also need to overload assignment operator.
+When it is needed to pass by value an instance of the object.
 
 </details>
 
@@ -867,7 +876,7 @@ When I want to move an object instead of copying it.
 
 </summary>
 
-I can use “smart pointers”, from the header memory.
+You could overload the function with a `delete`.
 It will automatically call `delete[]` when going out of scope, so I don’t need to manually free memory.
 
 </details>
@@ -929,6 +938,63 @@ Virtual destructors guarantee that the object of a derived class is destructed p
 
 </details>
 
+### Code snippets
+
+Find the errors in the following *code snippets*:
+
+<details><summary>
+
+```C++
+class Shape{
+ public:
+  virtual void print()=0;
+  virtual ~Shape(){};
+}
+
+class Circle: public Shape{
+  double r;
+  void print() override {std::cout<<r<<std::endl};
+  }
+
+int main(){
+  Shape s;
+  Circle c; 
+}
+```
+
+</summary>
+
+Since `Shape` is an abstract class, it is not possible to define `Shape s;` in the `main()` function.
+
+</details>
+
+<details><summary>
+
+```C++
+class Shape{
+ public:
+  virtual void print(){};
+  ~Shape(){};
+}
+
+class Polygon: public Shape{
+  double* v;
+  void print() override {std::cout<<"hi"<<std::endl};
+  Polygon(const int&N){v=new double[N];};
+  ~Polygon(){delete[] v;};
+  }
+
+int main(){
+  Shape* s = new Polygon(7);
+  s.print();
+}
+```
+
+</summary>
+
+The constructor, destructor and `print()` functions in `Polygon` have to be made public. Being `s` a pointer, `s.print()` has to be written as `s->print()`.
+
+</details>
 
 ## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/C++.svg"> **Lesson 7** - Command line parameters
 
@@ -967,7 +1033,7 @@ In a lambda function, the `mutable` keyword allows the captured variables to be 
 
 ---
 
-## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 8** - Jupyter
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 8** - Python basis, Jupyter
 
 <details><summary>
 
@@ -976,6 +1042,7 @@ In a lambda function, the `mutable` keyword allows the captured variables to be 
 </summary>
 
 Hit the `esc` key.
+If you want to add a cell above the current one, press `A`. If you want it below, press `B`.
 After that, you can change a cell to Markdown by hitting the `M` key.
 
 </details>
@@ -1006,7 +1073,7 @@ Hit the `esc` and then `A`.
 
 </summary>
 
-...
+It separates development environments, ensuring that project have compatible versions of the needed libraries.
 
 </details>
 
@@ -1016,7 +1083,7 @@ Hit the `esc` and then `A`.
 
 </summary>
 
-...
+It means that Python let the variable change in data types (for example, an `int` variable can assume `string` data type, or viceversa).
 
 </details>
 
@@ -1026,7 +1093,7 @@ Hit the `esc` and then `A`.
 
 </summary>
 
-...
+Python integers are represented as a class, and are less likely to occur in overflows.
 
 </details>
 
@@ -1036,7 +1103,7 @@ Hit the `esc` and then `A`.
 
 </summary>
 
-...
+A list is a mutable, resizable, ordered group of variables. A set is a mutable group of distinct variables. A tuple in Python is an ordered, non-mutable group of variables.
 
 </details>
 
@@ -1046,7 +1113,7 @@ Hit the `esc` and then `A`.
 
 </summary>
 
-It starts from the last element of the list (e.g `mylist[-1]` means the last element of the list).
+It access the list from the last element (e.g., `mylist[-1]` access the last element of `mylist` list).
 
 </details>
 
@@ -1109,8 +1176,8 @@ squares = [i*i for i in range(10)]
 </summary>
 
 ```python
-%matplotlib # set up matplotlib to work interactively.
-%%pylab     # load numpy and matplotlib to work interactively.
+%% file.txt # saves the current cell content into a file
+% timeit # calculate computation time of the selected command
 ```
 
 </details>
@@ -1122,9 +1189,9 @@ squares = [i*i for i in range(10)]
 </summary>
 
 ```python
-def helloworld():
+def hello_world():
     print("Hello world!")
-    return
+    return None
 ```
 
 </details>
@@ -1135,9 +1202,47 @@ def helloworld():
 
 </summary>
 
-...
+They are arguments that can be passed to a function by name, so the order does not matter. For esample, a function defined to work with parameters `a` and `b` can be called either by `fun(a=1, b=2)` or `fun(b=2, a=1)` and produces the same result.
 
 </details>
+
+### Code snippets
+
+Find the errors in the following *code snippets*:
+
+<details><summary>
+
+```python
+if x==0:
+print('x is zero')
+elif x>0:
+print('x is greater then zero')
+elif x<0:
+print('x is smaller than zero')
+```
+
+</summary>
+
+No indentation is an error in Python.
+
+</details>
+
+<details><summary>
+
+```python
+t = tuple(range(10))
+t[5]=100
+print(t[5])
+```
+
+</summary>
+
+Tuples are immutable, so it is not possible to modify a tuple element.
+
+</details>
+
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 9** - Numpy, Matplotlib
 
 <details><summary>
 
@@ -1145,7 +1250,7 @@ def helloworld():
 
 </summary>
 
-...
+To avoid namespace pollution. If you do so, you are not sure about the origin of used functions in the file (that can be overwritten by different libraries).
 
 </details>
 
@@ -1155,7 +1260,7 @@ def helloworld():
 
 </summary>
 
-...
+Numpy arrays are optiized for computation speed. It is needed to take particular caution when using numpy arrays, because rows are sometimes created by reference rather than by allocating new memory, so modifing a row affects all the others. Numpy arrays int overflows are possible.
 
 </details>
 
@@ -1165,9 +1270,11 @@ def helloworld():
 
 </summary>
 
-It is `matplotlib`.
+It is `matplotlib`. The `pyplot` module can be imported with `from matplotlib import pyplot as plt`.
 
 </details>
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 10** - Python classes
 
 <details><summary>
 
@@ -1175,9 +1282,30 @@ It is `matplotlib`.
 
 </summary>
 
-...
+To print the object when system function `print(obj)` is called.
 
 </details>
+
+### Code snippets
+
+Find the errors in the following *code snippets*:
+
+<details><summary>
+
+```python
+class MySecondClass:
+    def __init__(number):
+        self.number = number
+a=MySecondClass(4)
+```
+
+</summary>
+
+The `__init__` function takes also `self` as (first) argument.
+
+</details>
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 10** - SymPy, Decorators
 
 <details><summary>
 
@@ -1195,9 +1323,18 @@ A library that allows you to do symbolic calculations in Python is `SymPy`.
 
 </summary>
 
-...
+Decoratrors are function in Python that operates "on top" of other functions, modifing the output without modifing the function itself. An example:
+
+```python
+def my_decorator(fun):
+  def wrapped(*args, **kwargs):
+    return -fun(*args, **wkargs)
+  return wrapper
+```
 
 </details>
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 10** - Cytypes
 
 <details><summary>
 
@@ -1205,9 +1342,11 @@ A library that allows you to do symbolic calculations in Python is `SymPy`.
 
 </summary>
 
-...
+One possible way of calling C++ code from Python is using the `Cython` package, or `pybind` package.
 
 </details>
+
+## <img style="height:1em;vertical-align:middle;margin-right:.2em;" src="./images/python.svg"> **Lesson 11** - Pandas
 
 <details><summary>
 
@@ -1215,6 +1354,6 @@ A library that allows you to do symbolic calculations in Python is `SymPy`.
 
 </summary>
 
-...
+It is a Python library for working with Datasets. Functions examples are `pd.read_csv()`, `pd.DataFrame.to_csv()`, `pd.DataFrame.reset_index()`, `pd.DataFrame.drop()`, `pd.DataFrame.dropna()`.
 
 </details>
