@@ -267,7 +267,7 @@ In C++ it is better to use references to pass single variables, while pointers a
 
 </summary>
 
-Putting a `&` in front of the variable name.
+Putting a `&` in front of the variable name, for example `&x`.
 
 </details>
 
@@ -328,7 +328,7 @@ The function `function()` does not accept any input parameter, could performs so
 
 </summary>
 
-**Function overloading** is the practise of defining multiple functions with the same name, but with different input parameters (in nnumber and types).
+**Function overloading** is the practise of defining multiple functions with the same name, but with different input parameters (in number and/or types).
 
 </details>
 
@@ -448,7 +448,7 @@ int& y;
 
 </summary>
 
-a reference has to be initialized when declared. In this case, we should have written `int& y=x;` to have a reference `y` to `x`.
+Any reference must be initialized when declared. In this case, we should have written `int& y=x;` to have a reference `y` to `x`.
 
 </details>
 
@@ -474,7 +474,7 @@ This will give us the file `example.o` which is the object file.
 </summary>
 
 Because, for big projects, we would end up having files that are too long. This makes difficult to navigate through the code.
-Dividing the preject in multiple files is also useful for re-using part sof code.
+Dividing the preject in multiple files is also useful for re-using parts of code.
 
 </details>
 
@@ -788,7 +788,7 @@ void myPrint(const Types&... args){
 
 </summary>
 
-You should template on type `T`, and the define a function for printing a single element.
+We should template on type `T`, and then define a function for printing a single element.
 
 </details>
 
@@ -1202,7 +1202,7 @@ def hello_world():
 
 </summary>
 
-They are arguments that can be passed to a function by name, so the order does not matter. For esample, a function defined to work with parameters `a` and `b` can be called either by `fun(a=1, b=2)` or `fun(b=2, a=1)` and produces the same result.
+They are arguments that can be passed to a function by name, so the order does not matter. For example, a function defined to work with parameters `a` and `b` can be called either by `fun(a=1, b=2)` or `fun(b=2, a=1)` and produces the same result.
 
 </details>
 
